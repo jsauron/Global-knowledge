@@ -1,0 +1,69 @@
+/// GREEN SOCKS ANIMATED PLATFORM
+
+https://greensock.com/get-started
+API doc special properties - https://greensock.com/docs/v3/GSAP/Tween#h3-special-properties-callbacks-and-eases
+
+
+* Animation for all the JS touch (logo svg css property canvas)
+* Advantage : Faster than jquery and adapted for all browser
+ (add prefix -moz- -ms- ect)
+* Can add plugin for more skills (Draggable, drawSVGPlugin ..)
+* Special properties ( to define callbacks delays, easing, staggers, and more ) :
+
+
+  * delay - The delay before starting an animation.
+
+  * Callbacks -
+      onComplete - invoked when the animation has completed.
+      onStart: invoked when the animation begins
+      onUpdate: invoked every time the animation updates (on every frame while the animation is active).
+      onRepeat: invoked each time the animation repeats.
+      onReverseComplete: invoked when the animation has reached its beginning again when reversed.
+      ex :
+
+          gsap.to("#logo", {duration: 1, x: 100, onComplete: tweenComplete});
+
+          function tweenComplete() {
+            console.log("the tween is complete");
+          }
+
+  * ease - The ease that should be used (like "power2.inOut" cf GreenSock ease visualizer :
+    Requires CustomEase which can be downloaded at greensock.com/customease (not the CDN or github)).
+
+  * stagger - Staggers the starting time for each target/element animation :
+    Staggers make it easy to animate a group of objects with a small delay between the start of each object's animation.
+
+* Controlling Animations - methods all return a Tween instance,
+  so you can store it as a variable and then control :
+    gsap.to()
+    gsap.from()
+    gsap.fromTo()
+
+    //create a reference to the animation
+    var tween = gsap.to("#logo", {duration: 1, x: 100});
+    //pause
+    tween.pause();
+    //resume (honors direction - reversed or not)
+    tween.resume();
+    //reverse (always goes back towards the beginning)
+    tween.reverse();
+    //jump to exactly 0.5 seconds into the tween
+    tween.seek(0.5);
+    //jump to exacty 1/4th into the tween's progress:
+    tween.progress(0.25);
+    //make the tween go half-speed
+    tween.timeScale(0.5);
+    //make the tween go double-speed
+    tween.timeScale(2);
+    //immediately kill the tween and make it eligible for garbage collection
+    tween.kill();
+
+* Timeline  - usefull to not messing when you use lot of delay values for example
+     methods to() from() and fromTo() and add() :
+
+     //create a timeline instance
+     var tl = gsap.timeline();
+
+     //the following two lines do the SAME thing:
+     tl.add( gsap.to("#id", {duration: 2, x: 100}) );
+     tl.to("#id", {duration: 2, x: 100}); //shorter syntax!
